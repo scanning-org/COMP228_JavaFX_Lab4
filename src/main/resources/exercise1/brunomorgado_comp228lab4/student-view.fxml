@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -62,7 +63,7 @@
             <CheckBox fx:id="studentCouncil" layoutX="325.0" layoutY="100.0" mnemonicParsing="false" text="Student Council" />
             <CheckBox fx:id="volunteerWork" layoutX="326.0" layoutY="284.0" mnemonicParsing="false" text="Volunteer Work" />
             <ComboBox fx:id="cbCourses" layoutX="510.0" layoutY="118.0" prefHeight="52.0" prefWidth="169.0" promptText="Select Course" />
-            <TextArea fx:id="taCourses" layoutX="494.0" layoutY="184.0" prefHeight="200.0" prefWidth="200.0" promptText="Select your courses from the dropdown list above" />
+            <ListView fx:id="listView" layoutX="495.0" layoutY="193.0" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="26.0" prefHeight="44.0" prefWidth="825.0" style="-fx-background-color: white;">

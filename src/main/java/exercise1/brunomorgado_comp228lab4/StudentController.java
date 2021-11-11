@@ -11,9 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
+//Controller Class
 public class StudentController implements Initializable{
 
+    //Scene Components
     @FXML
     private TextArea taStudentSummary;
     @FXML
@@ -39,30 +40,34 @@ public class StudentController implements Initializable{
     @FXML
     private RadioButton rbBusiness;
     @FXML
-    private TextArea taCourses;
+    private ListView listView;
     @FXML
     private CheckBox studentCouncil;
     @FXML
     private CheckBox volunteerWork;
 
 
+    //Method to initialize the process
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
+        //Call method to populate the ComboBox
         populateComboBox();
 
-
+        //Event Handler for ComputerScience Radio Button
         rbComputerScience.setOnAction((event)->{
             populateComboBox();
-            taCourses.clear();
+            listView.getItems().clear();
             taStudentSummary.clear();
         });
+        //Event Handler for Business Radio Button
         rbBusiness.setOnAction((event) ->{
            populateComboBox();
-           taCourses.clear();
+            listView.getItems().clear();
            taStudentSummary.clear();
         });
 
+        //Event Handler for Courses ComboBox
         cbCourses.setOnAction((event)->{
 
             if(cbCourses.getValue() != null){
@@ -75,7 +80,8 @@ public class StudentController implements Initializable{
 
     };
 
-    @FXML
+
+    //Method to populate the ComboBox according to Radio Button selection
     public void populateComboBox(){
 
         if(rbComputerScience.isSelected()){
@@ -90,20 +96,21 @@ public class StudentController implements Initializable{
 
     }
 
-    @FXML
+    //Method to populate the LIstView
     public void populateTextArea(String course){
-        if(taCourses.getText().indexOf(course) != -1){
+
+        if(listView.getItems().contains(course)){
             Alert fail= new Alert(Alert.AlertType.INFORMATION);
             fail.setHeaderText("failure");
             fail.setContentText("This course has already been selected");
             fail.showAndWait();
-        }else{
-            taCourses.appendText(course + "\n");
+        }else {
+            listView.getItems().add(course);
         }
 
     }
 
-    @FXML
+    //Method to validate if all fields are filled in
     private boolean validateFields(){
 
         if(txtName.getText() == null || txtName.getText().trim().isEmpty() ||
@@ -120,7 +127,7 @@ public class StudentController implements Initializable{
             fail.showAndWait();
 
             return false;
-        }else if(taCourses.getText() == null || taCourses.getText().trim().isEmpty()){
+        }else if(listView.getItems() == null || listView.getItems().isEmpty()){
             Alert fail= new Alert(Alert.AlertType.WARNING);
             fail.setHeaderText("failure");
             fail.setContentText("Please Select your courses");
@@ -132,7 +139,7 @@ public class StudentController implements Initializable{
         return true;
     }
 
-    @FXML
+    //Email validation
     public boolean validateEmail(){
         Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
         Matcher m = p.matcher(txtEmail.getText());
@@ -142,7 +149,7 @@ public class StudentController implements Initializable{
         }
         else{
             Alert alert= new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Validate email");
+            alert.setHeaderText("Invalid email");
             alert.setContentText("Please enter a valid email");
             alert.showAndWait();
 
@@ -150,7 +157,7 @@ public class StudentController implements Initializable{
         }
     }
 
-    @FXML
+    //Name Validation
     public boolean validateName(){
         Pattern p = Pattern.compile("[a-zA-Z]+");
         Matcher m = p.matcher(txtName.getText());
@@ -160,7 +167,7 @@ public class StudentController implements Initializable{
         }
         else{
             Alert alert= new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText("Validate Name");
+            alert.setHeaderText("Invalid Name");
             alert.setContentText("Please enter a Name");
             alert.showAndWait();
 
@@ -168,7 +175,7 @@ public class StudentController implements Initializable{
         }
     }
 
-    @FXML
+    //Phone Vallidation
     public boolean validatePhone(){
         Pattern p = Pattern.compile("[4-9][0-9]{9}");
         Matcher m = p.matcher(txtPhoneNumber.getText());
@@ -186,7 +193,7 @@ public class StudentController implements Initializable{
         }
     }
 
-    @FXML
+    //Method to retrieve the value of the selected Radio Button
     public String getRadioButton(){
         RadioButton selectedRadioButton = (RadioButton) Program.getSelectedToggle();
         String toggleGroupValue = selectedRadioButton.getText();
@@ -194,14 +201,14 @@ public class StudentController implements Initializable{
         return toggleGroupValue;
     }
 
-    @FXML
+    //Method to retrieve the values from the CheckBoxes
     public String getAdditionalActivities(){
 
         String additionalActivities = "";
 
         if(studentCouncil.isSelected()){
             additionalActivities += studentCouncil.getText() + "\n";
-//            System.out.println(studentCouncil.isSelected());
+//
         }
         if(volunteerWork.isSelected()){
             additionalActivities += volunteerWork.getText() + "\n";
@@ -211,7 +218,7 @@ public class StudentController implements Initializable{
 
     }
 
-    @FXML
+    //Method to display a summary of all filled in / selected fields
     public void displayStudent(){
 
         if(validateFields() && validateEmail() && validateName() && validatePhone()){
@@ -220,8 +227,8 @@ public class StudentController implements Initializable{
                     + txtProvince.getText().toUpperCase() + ", " + txtCity.getText() + ", " + txtPostalCode.getText() + "\n"
                     + "PHONE:\t\t" + txtPhoneNumber.getText() + "\n" + "EMAIL:\t\t\t" + txtEmail.getText().toLowerCase() + "\n" +
                     "\nMAJOR:\t\t" + getRadioButton() + "." + "\n" +
-                    "\nCOURSES: " + "\n" + taCourses.getText() +
-                    "\nADDITIONAL ACTIVITIES: " + "\n" + getAdditionalActivities());
+                    "\nCOURSES: " + "\t\t" + listView.getItems() +
+                    "\n\nADDITIONAL ACTIVITIES: " + "\n\n" + getAdditionalActivities());
 
         }
 
