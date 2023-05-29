@@ -97,7 +97,6 @@ public class StudentController implements Initializable{
     }
 
     //Method to populate the LIstView
-    @ControllerAdvice
     public void populateTextArea(String course){
 
         if(listView.getItems().contains(course)){
@@ -112,6 +111,7 @@ public class StudentController implements Initializable{
     }
 
     //Method to validate if all fields are filled in
+    @ControllerAdvice
     private boolean validateFields(){
 
         if(txtName.getText() == null || txtName.getText().trim().isEmpty() ||
