@@ -11,7 +11,7 @@ def send_email(subject, body, to, user):
 
     msg.attach(MIMEText(body, 'plain'))
 
-    server = smtplib.SMTP('mail.manulife.com', 587)
+    server = smtplib.SMTP('mail.manulife.com', 25)
     # server.starttls()
     # server.login(user, password)
 
