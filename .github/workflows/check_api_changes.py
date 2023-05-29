@@ -17,7 +17,7 @@ def check_files_for_annotation(files):
     for file in files:
         with open(file, 'r') as f:
             lines = f.readlines()
-            for line in lines():
+            for line in lines:
                 for annotation in annotations:
                     if annotation in line:
                         print(f'API annotation {annotation} foun in {file}')
