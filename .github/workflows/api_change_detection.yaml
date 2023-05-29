@@ -28,4 +28,18 @@ jobs:
 
       - name: Check for API annotations
         run: |
-          python .github/workflows/check_api_changes.py
+          OUTPUT=$(python .github/workflows/check_api_changes.py)
+          echo "EMAIL_BODY=$OUTPUT" >> $GITHUB_ENV
+
+      - name: Get Commiter Email
+        id: get_email
+        run: |
+          COMMITER_EMAIL=$(git log -1 --pretty=format: '%ae')
+          echo "COMMITER_EMAIL=$COMMITER_EMAIL" >> $GITHUB_ENV
+
+      - name: Send email
+        env:
+          USER: ${{ secrets.USER }}
+          PASSWORD = ${{ secrets.PASSWORD }}
+        run: |
+          python .github/workflows/send_email.py
