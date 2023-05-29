@@ -28,6 +28,7 @@ jobs:
 
       - name: Check for API annotations
         run: |
+<<<<<<< HEAD
           OUTPUT=$(python .github/workflows/check_api_changes.py)
           echo "EMAIL_BODY=$OUTPUT" >> $GITHUB_ENV
 
@@ -40,6 +41,7 @@ jobs:
       - name: Send email
         env:
           USER: ${{ secrets.USER }}
-          PASSWORD = ${{ secrets.PASSWORD }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           python .github/workflows/send_email.py
+
