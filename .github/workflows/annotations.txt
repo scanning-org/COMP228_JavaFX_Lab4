@@ -1,0 +1,16 @@
+@RestController
+@RequestMapping
+@GetMapping
+@PostMapping
+@PutMapping
+@DeleteMapping
+@PatchMapping
+@PathVariable
+@RequestParam
+@RequestBody
+@ResponseBody
+@ResponseStatus
+@CrossOrigin
+@EnabledWebMvc
+@ControllerAdvice
+@ExceptionHandler
