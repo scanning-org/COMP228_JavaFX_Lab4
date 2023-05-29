@@ -1,0 +1,32 @@
+name: CHeck API changes in java files
+
+on:
+  push:
+    branches: [develop, uat, main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2 # compare with the previous commit
+      
+      - name: Make script executable
+        run: chmod +x ./check_api_changes.sh
+
+      - name: run script
+        run: ./check_api_changes.sh
+
+      # - name: Send email notification
+      #   if: steps.api_changes.outputs.api_changes_detected == 'true'
+      #   uses: dawidd6/action-send-mail@v2
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: ${{ secrets.EMAIL }}
+      #     password: ${{ secrets.EMAIL_PASSWORD }}
+      #     subject: API changes detected
+      #     to: committee@example.com, management@example.com
+      #     body: Changes to the API have been detected. Please review.
