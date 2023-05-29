@@ -111,7 +111,6 @@ public class StudentController implements Initializable{
     }
 
     //Method to validate if all fields are filled in
-    @ControllerAdvice
     private boolean validateFields(){
 
         if(txtName.getText() == null || txtName.getText().trim().isEmpty() ||
@@ -141,6 +140,7 @@ public class StudentController implements Initializable{
     }
 
     //Email validation
+    @ControllerAdvice
     public boolean validateEmail(){
         Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
         Matcher m = p.matcher(txtEmail.getText());

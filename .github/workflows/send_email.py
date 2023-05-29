@@ -3,7 +3,7 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_email(subject, body, to, user, password):
+def send_email(subject, body, to, user):
     msg = MIMEMultipart()
     msg['From'] = user
     msg['To'] = ", ".join(to)
@@ -11,9 +11,9 @@ def send_email(subject, body, to, user, password):
 
     msg.attach(MIMEText(body, 'plain'))
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(user, password)
+    server = smtplib.SMTP('mail.manulife.com', 587)
+    # server.starttls()
+    # server.login(user, password)
 
     text = msg.as_string()
     server.sendmail(user, to, text)
@@ -24,9 +24,9 @@ def main():
     body = os.environ["EMAIL_BODY"]
     to = [os.environ["COMMITER_EMAIL"], "bruno_fernando_cantanhede_morgado@manulife.ca"]
     user = os.environ["USER"]
-    password = os.environ["PASSWORD"]
+    # password = os.environ["PASSWORD"]
 
-    send_email(subject, body, to, user, password)
+    send_email(subject, body, to, user)
 
 if __name__ == "__main__":
     main()
