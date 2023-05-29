@@ -2,7 +2,10 @@ name: CHeck API changes in java files
 
 on:
   push:
+    paths: 
+    - '**.java'
     branches: [develop, uat, main, master]
+       
 
 jobs:
   build:
@@ -12,23 +15,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 2 # compare with the previous commit
-      
-      - name: Make script executable
-        run: chmod +x ./check_api_changes.sh
 
-      - name: run script
-        run: ./check_api_changes.sh
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-      - name: show API changes report
-        run: cat api_changes_report.txt
-      # - name: Send email notification
-      #   if: steps.api_changes.outputs.api_changes_detected == 'true'
-      #   uses: dawidd6/action-send-mail@v2
-      #   with:
-      #     server_address: smtp.gmail.com
-      #     server_port: 465
-      #     username: ${{ secrets.EMAIL }}
-      #     password: ${{ secrets.EMAIL_PASSWORD }}
-      #     subject: API changes detected
-      #     to: committee@example.com, management@example.com
-      #     body: Changes to the API have been detected. Please review.
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pygit2
+
+      - name: Check for API annotations
+        run: |
+          python .github/workflows/check_api_changes.py
