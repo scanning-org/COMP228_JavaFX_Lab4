@@ -19,6 +19,8 @@ jobs:
       - name: run script
         run: ./check_api_changes.sh
 
+      - name: show API changes report
+        run: cat api_changes_report.txt
       # - name: Send email notification
       #   if: steps.api_changes.outputs.api_changes_detected == 'true'
       #   uses: dawidd6/action-send-mail@v2
