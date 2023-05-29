@@ -82,7 +82,6 @@ public class StudentController implements Initializable{
 
 
     //Method to populate the ComboBox according to Radio Button selection
-    @RestController
     public void populateComboBox(){
 
         if(rbComputerScience.isSelected()){
@@ -98,6 +97,7 @@ public class StudentController implements Initializable{
     }
 
     //Method to populate the LIstView
+    @RestController
     public void populateTextArea(String course){
 
         if(listView.getItems().contains(course)){
