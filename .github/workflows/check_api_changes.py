@@ -29,7 +29,7 @@ def check_files_for_annotation(files, annotations):
 
 def main():
     files = get_changed_files()
-    annotations = read_annotations_from_file('annotations.txt')
+    annotations = read_annotations_from_file('./annotations.txt')
     check_files_for_annotation(files, annotations)
 
 
