@@ -82,6 +82,7 @@ public class StudentController implements Initializable{
 
 
     //Method to populate the ComboBox according to Radio Button selection
+    @RestController
     public void populateComboBox(){
 
         if(rbComputerScience.isSelected()){
